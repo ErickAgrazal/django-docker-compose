@@ -17,21 +17,21 @@ Para saber más, ir [aquí.](https://www.docker.com/what-docker)
 ### TODO
 
 # 4. Instalación de ambiente
-## Windows
+## 4.1 Windows
 ### Instalar Docker-toolbox (Windows 8+):
 [Ir aquí.](https://docs.docker.com/toolbox/toolbox_install_windows/) 
 
-## 4.1 Ubuntu
+## 4.2 Ubuntu
 ### Instalar Docker (Ubuntu 16.04):
 [Ir aquí.](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-from-a-package)
 ### Instalar Docker-compose (Ubuntu 16.04):
 [Ir aquí.](https://docs.docker.com/compose/install/)
 
-## 4.2 Mac
+## 4.3 Mac
 ### Instalar Docker-toolbox:
 [Ir aquí.](https://www.docker.com/docker-mac)
 
-## 4.3 Vagrant (Opcional):
+## 4.4 Vagrant (Opcional):
 [Ir aquí.](https://https://www.vagrantup.com/downloads.html)
 
 # 5. Construir ambiente

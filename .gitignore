@@ -105,3 +105,6 @@ postgres-data/
 
 # Vagrant
 .vagrant/
+
+# MAC
+.DS_Store
