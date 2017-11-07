@@ -5,10 +5,13 @@ from django.contrib import admin
 
 from apps.home.views import (HomeView, Ejercicios)
 
+# from apps.parcial.views import Parte1View, Parte2View
+
 
 urlpatterns = [
     url(r'^$', HomeView.as_view()),
     url(r'^(?P<t>[\w]+)/(?P<n>[0-9]+)$', Ejercicios.as_view()),
+
     url(r'^admin/', admin.site.urls),
 ]
 
