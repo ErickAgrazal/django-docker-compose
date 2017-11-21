@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.views.generic import TemplateView
 from django.shortcuts import render
+from django.views.generic import ListView, TemplateView
+
+from .models import Estudiante
 
 
 class Ejercicios(TemplateView):
@@ -19,10 +21,19 @@ class Ejercicios(TemplateView):
         return '{0}/{1}'.format(t, n)
 
     def get(self, request, *args, **kwargs):
-        template_name = self.get_template(self.kwargs.get('t'),
-                                          self.kwargs.get('n'))
+        template_name = self.get_template(self.kwargs.get('t'), self.kwargs.get('n'))
         return render(request, template_name)
 
 
 class HomeView(TemplateView):
     template_name = "home.html"
+
+
+class EstudianteListView(ListView):
+    template_name = "estudiante_list.html"
+    model = Estudiante
+    http_method_names = [u'get', ]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(edad=35)
