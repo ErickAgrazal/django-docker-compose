@@ -2,9 +2,10 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, CreateView, TemplateView, UpdateView, DeleteView
 
-from .models import Estudiante
+from .forms import EstudianteModelForm
+from .models import Estudiante, Asignatura
 
 
 class Ejercicios(TemplateView):
@@ -36,4 +37,35 @@ class EstudianteListView(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(edad=35)
+        return qs.filter()
+
+
+class EstudianteCreateView(CreateView):
+    template_name = "estudiante_create.html"
+    http_method_names = [u'get', u'post', ]
+    success_url = '/estudiantes'
+    form_class = EstudianteModelForm
+
+
+class EstudianteUpdateView(UpdateView):
+    template_name = "estudiante_create.html"
+    http_method_names = [u'get', u'post', ]
+    success_url = '/estudiantes'
+    form_class = EstudianteModelForm
+    model = Estudiante
+
+
+class EstudianteDeleteView(DeleteView):
+    template_name = "estudiante_delete.html"
+    model = Estudiante
+    success_url = '/estudiantes'
+
+
+class AsignaturaListView(ListView):
+    template_name = "asignatura_list.html"
+    model = Asignatura
+    http_method_names = [u'get', ]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter()

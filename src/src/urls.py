@@ -3,14 +3,21 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 
-from apps.home.views import (HomeView, Ejercicios, EstudianteListView)
+from apps.home.views import (HomeView, Ejercicios,
+                             EstudianteListView, EstudianteCreateView, EstudianteUpdateView, EstudianteDeleteView,
+                             AsignaturaListView)
 
 # from apps.parcial.views import Parte1View, Parte2View
 
 
 urlpatterns = [
     url(r'^$', HomeView.as_view()),
-    url(r'^estudiantes/lista$', EstudianteListView.as_view()),
+    url(r'^estudiantes$', EstudianteListView.as_view(), name="estudiantes_list"),
+    url(r'^estudiantes/crear$', EstudianteCreateView.as_view(), name="estudiantes_create"),
+    url(r'^estudiantes/actualizar/(?P<slug>[\w]+)$', EstudianteUpdateView.as_view(), name="estudiantes_update"),
+    url(r'^estudiantes/eliminar/(?P<slug>[\w]+)$', EstudianteDeleteView.as_view(), name="estudiantes_delete"),
+
+    url(r'^asignatura$', AsignaturaListView.as_view()),
 
     url(r'^(?P<t>[\w]+)/(?P<n>[0-9]+)$', Ejercicios.as_view()),
 

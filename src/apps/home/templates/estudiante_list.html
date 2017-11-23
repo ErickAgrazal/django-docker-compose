@@ -10,19 +10,31 @@
           <tr>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Género</th>
             <th>Edad</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
           {% for object in object_list %}
           <tr>
-            <td>{{ object.nombre }}</td>
+            <td>{{ object.nombre }}</a></td>
             <td>{{ object.apellido }}</td>
-            <td>{{object.edad}}</td>
+            <td>{{ object.genero }}</td>
+            <td>{{ object.edad }}</td>
+            <td><a href="{% url 'estudiantes_update' object.slug %}">Editar</a></td>
+            <td><a href="{% url 'estudiantes_delete' object.slug %}">Eliminar</a></td>
           </tr>
           {% endfor %}
         </tbody>
     </table>
   </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12" >
+        <a class="btn btn-success" href="{% url 'estudiantes_create' %}">Crear Estudiante</a>
+    </div>
 </div>
 {% endblock %}

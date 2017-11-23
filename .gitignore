@@ -103,6 +103,11 @@ ENV/
 # Postgres
 postgres-data/
 
+# SQLITE
+src/db.sqlite3
+*.sqlite3
+*.sqlite
+
 # Vagrant
 .vagrant/
 

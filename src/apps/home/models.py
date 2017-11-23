@@ -3,6 +3,7 @@
 Models.py
 """
 from django.db import models
+from django.utils.text import slugify
 
 # from src.apps.core.models import BaseModel
 # from src.apps.users.models import User
@@ -37,6 +38,9 @@ class Estudiante(models.Model):
         (MUJER, "Mujer"),
         (OTROS, "Otros"),
     )
+
+    slug = models.SlugField(max_length=100, unique=True, blank=False, null=False, default='', verbose_name='Slug')
+
     nombre = models.CharField(max_length=100, blank=False, null=False, default='', verbose_name='Nombre')
     apellido = models.CharField(max_length=100, blank=True, null=True, default='', verbose_name='Apellido')
     edad = models.PositiveIntegerField(blank=True, null=True, verbose_name='Edad')
@@ -59,4 +63,48 @@ class Estudiante(models.Model):
 
     def __str__(self, *args, **kwargs):
         # Python 3
-        return '{} - {}'.format(self.nombre, self.apellido)
+        ctx = {
+            'nombre': self.nombre,
+            'apellido': self.apellido
+        }
+        return '{nombre} - {apellido}'.format(**ctx)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nombre + self.apellido)
+        super(Estudiante, self).save(*args, **kwargs)
+
+
+class Asignatura(models.Model):
+    SISTEMAS = '0'
+    INDUSTRIAL = '1'
+    CIVIL = '2'
+    ELECTRICA = '3'
+
+    FACULTY_CHOICES = (
+        (SISTEMAS, "Facultad de Sistemas"),
+        (INDUSTRIAL, "Facultad de Industrial"),
+        (CIVIL, "Facultad de Civil"),
+        (ELECTRICA, "Facultad de Eléctrica"),
+    )
+
+    nombre = models.CharField(max_length=100, blank=False, null=False, default='', verbose_name='Nombre')
+    descripcion = models.TextField(blank=True, null=True, default='', verbose_name='Descripción')
+    codigo = models.CharField(max_length=10, blank=True, null=True, verbose_name='Código')
+    facultad = models.CharField(max_length=30, choices=FACULTY_CHOICES, default=SISTEMAS,
+                                blank=True, null=True, verbose_name='Género')
+
+    fecha_de_creacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
+    fecha_de_actualizacion = models.DateTimeField(auto_now=True, verbose_name='Fecha de actualización')
+
+    class Meta:
+        verbose_name_plural = 'Asignaturas'
+        db_table = 'asignaturas'
+        ordering = ['facultad', 'nombre', ]
+
+    def __unicode__(self, *args, **kwargs):
+        # Python 2
+        return '{}'.format(self.nombre)
+
+    def __str__(self, *args, **kwargs):
+        # Python 3
+        return '{} - {}'.format(self.facultad, self.nombre)
