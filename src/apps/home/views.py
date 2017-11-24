@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, TemplateView, UpdateView, DeleteView
 
-from .forms import EstudianteModelForm
+from .forms import EstudianteModelForm, AsignaturaModelForm
 from .models import Estudiante, Asignatura
 
 
@@ -69,3 +69,24 @@ class AsignaturaListView(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter()
+
+
+class AsignaturaCreateView(CreateView):
+    template_name = "asignatura_create.html"
+    http_method_names = [u'get', u'post', ]
+    success_url = '/asignaturas'
+    form_class = AsignaturaModelForm
+
+
+class AsignaturaUpdateView(UpdateView):
+    template_name = "asignatura_create.html"
+    http_method_names = [u'get', u'post', ]
+    success_url = '/asignaturas'
+    model = Asignatura
+    form_class = AsignaturaModelForm
+
+
+class AsignaturaDeleteView(DeleteView):
+    template_name = "asignatura_delete.html"
+    model = Asignatura
+    success_url = '/asignaturas'

@@ -70,7 +70,7 @@ class Estudiante(models.Model):
         return '{nombre} - {apellido}'.format(**ctx)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.nombre + self.apellido)
+        self.slug = slugify(self.nombre)
         super(Estudiante, self).save(*args, **kwargs)
 
 
@@ -86,6 +86,8 @@ class Asignatura(models.Model):
         (CIVIL, "Facultad de Civil"),
         (ELECTRICA, "Facultad de Eléctrica"),
     )
+
+    slug = models.SlugField(max_length=100, unique=False, blank=False, null=False, default='', verbose_name='Slug')
 
     nombre = models.CharField(max_length=100, blank=False, null=False, default='', verbose_name='Nombre')
     descripcion = models.TextField(blank=True, null=True, default='', verbose_name='Descripción')

@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Estudiante
+from .models import Estudiante, Asignatura
 
 
 class BootstrapModelForm(ModelForm):
@@ -15,4 +15,10 @@ class BootstrapModelForm(ModelForm):
 class EstudianteModelForm(BootstrapModelForm):
     class Meta:
         model = Estudiante
+        exclude = ('slug', )
+
+
+class AsignaturaModelForm(BootstrapModelForm):
+    class Meta:
+        model = Asignatura
         exclude = ('slug', )

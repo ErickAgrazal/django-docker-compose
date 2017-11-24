@@ -11,6 +11,8 @@
             <th>Código</th>
             <th>Nombre</th>
             <th>Faculad</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -19,10 +21,18 @@
             <td>{{ object.codigo }}</td>
             <td>{{ object.nombre }}</td>
             <td>{{ object.facultad }}</td>
+            <td><a href="{% url 'asignaturas_update' object.pk %}">Editar</a></td>
+            <td><a href="{% url 'asignaturas_delete' object.pk %}">Eliminar</a></td>
           </tr>
           {% endfor %}
         </tbody>
     </table>
   </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12" >
+        <a class="btn btn-success" href="{% url 'asignaturas_create' %}">Crear Asignatura</a>
+    </div>
 </div>
 {% endblock %}
